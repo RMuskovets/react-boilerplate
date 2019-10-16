@@ -10,7 +10,7 @@ module.exports = {
 			method: 'get',
 			urlParams: [],
 			fn: (req, res, params) => res.send({ username: 'roman' }),
-			middleware: 'none'
+			middleware: 'plain'
 		}
 	}
 }
