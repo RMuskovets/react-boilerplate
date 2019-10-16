@@ -7,7 +7,6 @@ const express = require('express');
 const os = require('os');
 
 const fns = require('./fns').fns;
-const middlewares = require('./middleware').middlewares;
 
 const apiPrefix = 'api';
 
@@ -18,7 +17,7 @@ app.use(express.static('dist'));
 Object.keys(fns).forEach(url => {
 	let { method, urlParams, fn, middleware } = fns[url];
 	let fnUrl = `/${apiPrefix}/${url}/`;
-	let middlewareFn = middlewares[middleware] || middlewares.plain;
+	middleware = middleware || middlewares.plain;
 	urlParams.forEach(param => {
 		fnUrl += `:${param}/`;
 	});
@@ -31,11 +30,11 @@ Object.keys(fns).forEach(url => {
 	switch (method) {
 		case 'get':
 		case 'GET':
-			app.get(fnUrl, middlewareFn, func);
+			app.get(fnUrl, middleware, func);
 			break;
 		case 'post':
 		case 'POST':
-			app.post(fnUrl, middlewareFn, func);
+			app.post(fnUrl, middleware, func);
 			break;
 		default:
 			console.error(`[ROUTER] No such method: ${method} (/api/${url})`);
