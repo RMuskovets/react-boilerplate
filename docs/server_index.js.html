@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: server/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,59 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: server/index.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * The server code.
+ * @author Sandeep Ravesh, Roman Myskovets
+*/
 
+const express = require('express');
+const os = require('os');
 
-    <h3> </h3>
+const fns = require('./fns').fns;
 
+const app = express();
 
+app.use(express.static('dist'));
 
+Object.keys(fns).forEach(url => {
+	let { method, urlParams, fn } = fns[url];
+	let fnUrl = `/api/${url}/`;
+	urlParams.forEach(param => {
+		fnUrl += `:${param}/`;
+	});
+	let func = (req, res) => {
+		fn(req, res, {
+			GET: req.query,
+			URL: req.params
+		})
+	};
+	switch (method) {
+		case 'get':
+		case 'GET':
+			app.get(fnUrl, func);
+			break;
+		case 'post':
+		case 'POST':
+			app.post(fnUrl, func);
+			break;
+		default:
+			console.error(`[ROUTER] No such method: ${method} (/api/${url})`);
+	}
+});
 
-
-
-
-
-
-
-    
-
-
-
-
-
+app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
+</code></pre>
+        </article>
+    </section>
 
 
 

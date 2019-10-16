@@ -1,6 +1,6 @@
 /**
+ * The server code.
  * @author Sandeep Ravesh, Roman Myskovets
- * The server code
 */
 
 const express = require('express');
