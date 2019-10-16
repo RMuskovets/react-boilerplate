@@ -11,13 +11,6 @@ const fns = require('./fns').fns;
 const app = express();
 
 app.use(express.static('dist'));
-// app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
-
-// app.use('/api/:fn', (req, res, next) => {
-// 	if (req.params.fn === 'getUsername') {
-
-// 	} else next();
-// });
 
 Object.keys(fns).forEach(url => {
 	let { method, urlParams, fn } = fns[url];
