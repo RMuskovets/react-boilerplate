@@ -1,3 +1,9 @@
+/**
+ * @author Roman Myskovets, Sandeep Ravesh
+ * @module client/index
+ * @see module:client/App
+*/
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
