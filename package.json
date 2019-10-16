@@ -10,7 +10,8 @@
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "docs": "jsdoc -r -d docs/ -c .jsdoc.conf.json ."
+    "docs": "jsdoc -r -d docs/ -c .jsdoc.conf.json .",
+    "ci": "npm run build && npm run docs"
   },
   "author": "Sandeep Raveesh",
   "license": "ISC",
